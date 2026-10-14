@@ -5,7 +5,9 @@ import { consultationFormContent } from "@/data/contact";
 import { validateContactForm, ContactFormData, ValidationErrors } from "@/lib/validation";
 import { FormField } from "@/components/ui/FormField";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2 } from "lucide-react";
+import { WindowFrame } from "@/components/ui/WindowFrame";
+import { Highlight } from "@/components/ui/Highlight";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
 
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -63,10 +65,6 @@ export function ContactForm() {
       timestamp: new Date().toISOString(),
     });
 
-    /**
-     * TODO: Connect this submission to your production API endpoint / email dispatch service.
-     */
-
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
@@ -87,46 +85,60 @@ export function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <div
-        className="p-8 sm:p-12 rounded-card bg-white border border-line shadow-card text-center space-y-6 flex flex-col items-center justify-center min-h-[420px] animate-fadeIn"
-        role="status"
-        aria-live="polite"
-      >
-        <div className="w-14 h-14 rounded-full bg-green-tint text-green flex items-center justify-center mx-auto">
-          <CheckCircle2 className="w-8 h-8 stroke-[2.5]" aria-hidden="true" />
-        </div>
-
-        <div className="space-y-2 max-w-md">
-          <h3 className="font-heading font-extrabold text-2xl text-ink">
-            Consultation Request Received
-          </h3>
-          <p className="text-base text-ink-soft leading-relaxed font-medium">
-            {consultationFormContent.successMessage}
-          </p>
-          <p className="text-xs text-ink-muted">
-            We will contact you via{" "}
-            <span className="font-semibold text-ink">{formData.officialEmail}</span>.
-          </p>
-        </div>
-
-        <Button
-          variant="secondary"
-          size="md"
-          onClick={handleReset}
+      <WindowFrame title="consultation-confirmed.status" className="shadow-window">
+        <div
+          className="py-10 px-4 sm:p-12 text-center space-y-6 flex flex-col items-center justify-center min-h-[420px] animate-fadeIn"
+          role="status"
+          aria-live="polite"
         >
-          Submit another request
-        </Button>
-      </div>
+          <div className="w-16 h-16 rounded-full bg-green-tint text-green flex items-center justify-center mx-auto shadow-sm">
+            <CheckCircle2 className="w-9 h-9 stroke-[2.5]" aria-hidden="true" />
+          </div>
+
+          <div className="space-y-2 max-w-md">
+            <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-ink">
+              Consultation Request Received
+            </h3>
+            <p className="text-base text-ink-soft leading-relaxed font-medium">
+              {consultationFormContent.successMessage}
+            </p>
+            <p className="text-xs text-ink-muted">
+              We will contact you via{" "}
+              <span className="font-semibold text-ink font-mono">{formData.officialEmail}</span>.
+            </p>
+          </div>
+
+          <Button
+            variant="secondary"
+            size="md"
+            onClick={handleReset}
+          >
+            Submit another request
+          </Button>
+        </div>
+      </WindowFrame>
     );
   }
 
   return (
-    <div className="rounded-card bg-white border border-line shadow-card p-6 sm:p-10">
+    <WindowFrame title="schedule-consultation.spec" className="shadow-window">
+      {/* Top Session Badge */}
+      <div className="mb-6 pb-4 border-b border-line flex flex-wrap items-center justify-between gap-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-green-tint text-green text-xs font-mono font-bold uppercase tracking-wider">
+          <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
+          <span>Free Strategy Session</span>
+        </div>
+        <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">
+          Direct Marketing Expert Connect
+        </span>
+      </div>
+
       <div className="mb-8 space-y-2 text-left">
         <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-ink tracking-tight">
-          {consultationFormContent.cardTitle}
+          Book a Free Consultation with Our{" "}
+          <Highlight>Marketing Expert</Highlight>
         </h2>
-        <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
+        <p className="text-sm sm:text-base text-ink-soft leading-relaxed font-normal">
           {consultationFormContent.cardSubtitle}
         </p>
       </div>
@@ -175,7 +187,7 @@ export function ContactForm() {
             id="mobileNumber"
             label="Mobile number"
             type="tel"
-            placeholder="Enter your contact number"
+            placeholder="+91 98765 43210"
             value={formData.mobileNumber}
             onChange={handleChange}
             error={errors.mobileNumber}
@@ -185,9 +197,9 @@ export function ContactForm() {
 
           <FormField
             id="officialEmail"
-            label="Official email"
+            label="Official email address"
             type="email"
-            placeholder="Enter your business email address"
+            placeholder="name@company.com"
             value={formData.officialEmail}
             onChange={handleChange}
             error={errors.officialEmail}
@@ -199,8 +211,8 @@ export function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             id="city"
-            label="City"
-            placeholder="Enter your city"
+            label="City / Location"
+            placeholder="e.g. Mumbai, Bengaluru, Delhi"
             value={formData.city}
             onChange={handleChange}
             error={errors.city}
@@ -210,29 +222,42 @@ export function ContactForm() {
 
           <FormField
             id="service"
-            label="Select required service"
+            label="Interested service"
             type="select"
-            placeholder="Select a service"
+            options={consultationFormContent.serviceOptions}
             value={formData.service}
             onChange={handleChange}
             error={errors.service}
-            options={consultationFormContent.serviceOptions}
             required
           />
         </div>
 
-        <div className="pt-3 text-left">
+        {/* Action Button */}
+        <div className="pt-2">
           <Button
             type="submit"
             variant="green"
-            size="hero"
-            isLoading={isSubmitting}
-            className="w-full sm:w-auto"
+            size="lg"
+            className="w-full text-center"
+            disabled={isSubmitting}
           >
-            {consultationFormContent.submitButtonLabel} →
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span>Processing Consultation Request...</span>
+              </span>
+            ) : (
+              <span>{consultationFormContent.submitButtonLabel} →</span>
+            )}
           </Button>
         </div>
+
+        {/* Security / Privacy reassurance notice */}
+        <div className="pt-2 flex items-center justify-center gap-2 text-xs text-ink-muted">
+          <ShieldCheck className="w-4 h-4 text-green shrink-0" aria-hidden="true" />
+          <span>Strict Enterprise Confidentiality • No Spam Policy</span>
+        </div>
       </form>
-    </div>
+    </WindowFrame>
   );
 }

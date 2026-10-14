@@ -37,21 +37,21 @@ export function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Scroll parallax
+  // Scroll parallax (active on both desktop and mobile)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const smoothLeftX = useSpring(useTransform(scrollYProgress, [0, 1], [0, -24]), {
+  const smoothLeftX = useSpring(useTransform(scrollYProgress, [0, 1], [0, -18]), {
     stiffness: 100,
     damping: 24,
   });
-  const smoothRightX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 24]), {
+  const smoothRightX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 18]), {
     stiffness: 100,
     damping: 24,
   });
-  const smoothFrontY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -12]), {
+  const smoothFrontY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -10]), {
     stiffness: 100,
     damping: 24,
   });
@@ -79,9 +79,9 @@ export function HeroVisual() {
             <span className="text-ink-soft">Deals closed</span>
             <span className="font-bold text-ink font-mono">{dellStudy?.rawMetrics.dealsClosed || 5}</span>
           </div>
-          <div className="flex items-center justify-between pt-2.5 sm:pt-3 pb-1">
+          <div className="flex items-center justify-between pt-2 sm:pt-3 pb-1">
             <span className="text-xs sm:text-sm font-semibold text-ink">Total business generated</span>
-            <span className="font-heading font-black text-lg sm:text-xl text-ink">
+            <span className="font-heading font-black text-base sm:text-xl text-ink">
               <Highlight isHero={true}>{dellStudy?.rawMetrics.totalBusinessGenerated || "INR 2.15 Crore"}</Highlight>
             </span>
           </div>
@@ -106,9 +106,9 @@ export function HeroVisual() {
             <span className="text-ink-soft">Completed meetings</span>
             <span className="font-bold text-ink font-mono">{rubrikStudy?.rawMetrics.appointmentsCompleted || 18}</span>
           </div>
-          <div className="flex items-center justify-between pt-2.5 sm:pt-3 pb-1">
+          <div className="flex items-center justify-between pt-2 sm:pt-3 pb-1">
             <span className="text-xs sm:text-sm font-semibold text-ink">Success rate</span>
-            <span className="font-heading font-black text-lg sm:text-xl text-green font-mono">
+            <span className="font-heading font-black text-base sm:text-xl text-green font-mono">
               <Highlight isHero={true}>{rubrikStudy?.computedRates[0].formatted || "72%"}</Highlight>
             </span>
           </div>
@@ -129,19 +129,19 @@ export function HeroVisual() {
             <span className="text-ink-soft">Confirmations</span>
             <span className="font-bold text-ink font-mono">
               {nobelStudy?.rawMetrics.attendanceConfirmations || 86}{" "}
-              <span className="text-green text-xs">({nobelStudy?.computedRates[0].formatted || "81.9%"})</span>
+              <span className="text-green text-[11px] sm:text-xs">({nobelStudy?.computedRates[0].formatted || "81.9%"})</span>
             </span>
           </div>
           <div className="flex items-center justify-between py-2 sm:py-2.5 text-xs sm:text-sm">
             <span className="text-ink-soft">Actual participants</span>
             <span className="font-bold text-ink font-mono">
               {nobelStudy?.rawMetrics.actualParticipants || 52}{" "}
-              <span className="text-green text-xs">({nobelStudy?.computedRates[1].formatted || "60.47%"})</span>
+              <span className="text-green text-[11px] sm:text-xs">({nobelStudy?.computedRates[1].formatted || "60.47%"})</span>
             </span>
           </div>
-          <div className="flex items-center justify-between pt-2.5 sm:pt-3 pb-1">
+          <div className="flex items-center justify-between pt-2 sm:pt-3 pb-1">
             <span className="text-xs sm:text-sm font-semibold text-ink">Opportunities generated</span>
-            <span className="font-heading font-black text-lg sm:text-xl text-ink">
+            <span className="font-heading font-black text-base sm:text-xl text-ink">
               <Highlight isHero={true}>7 Qualified Deals</Highlight>
             </span>
           </div>
@@ -179,7 +179,7 @@ export function HeroVisual() {
     setProgress(0);
   }, [screens.length]);
 
-  // Timer loop via requestAnimationFrame
+  // Timer loop via requestAnimationFrame (4.5s cycle)
   useEffect(() => {
     if (isPaused) return;
 
@@ -214,18 +214,18 @@ export function HeroVisual() {
       ref={containerRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="mockup-container relative w-full max-w-[480px] mx-auto py-8 sm:py-12 select-none"
+      className="mockup-container relative w-full max-w-[460px] mx-auto py-5 sm:py-12 select-none overflow-visible"
     >
-      {/* Back-left Window (rotated -4deg, slightly offset left) */}
+      {/* Back-left Window: Active on all viewports with subtle angle */}
       <motion.div
         aria-hidden="true"
         style={{
           x: shouldReduceMotion ? 0 : smoothLeftX,
         }}
         className={cn(
-          "absolute -left-4 sm:-left-10 top-3 sm:top-5 w-[92%] sm:w-[94%]",
+          "absolute -left-2.5 sm:-left-8 top-2 sm:top-5 w-[93%] sm:w-[94%]",
           "-rotate-2 sm:-rotate-4 pointer-events-none z-0",
-          "opacity-40 sm:opacity-55 filter blur-[0.6px]"
+          "opacity-45 sm:opacity-55 filter blur-[0.5px]"
         )}
       >
         <WindowFrame title={screens[prevScreenIdx].title} className="bg-mist/95 shadow-md">
@@ -236,7 +236,7 @@ export function HeroVisual() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="pointer-events-none"
+              className="pointer-events-none text-xs"
             >
               {screens[prevScreenIdx].content}
             </motion.div>
@@ -244,16 +244,16 @@ export function HeroVisual() {
         </WindowFrame>
       </motion.div>
 
-      {/* Back-right Window (rotated +4deg, slightly offset right/down) */}
+      {/* Back-right Window: Active on all viewports with subtle angle */}
       <motion.div
         aria-hidden="true"
         style={{
           x: shouldReduceMotion ? 0 : smoothRightX,
         }}
         className={cn(
-          "absolute -right-4 sm:-right-10 top-7 sm:top-9 w-[92%] sm:w-[94%]",
+          "absolute -right-2.5 sm:-right-8 top-4 sm:top-9 w-[93%] sm:w-[94%]",
           "rotate-2 sm:rotate-4 pointer-events-none z-0",
-          "opacity-40 sm:opacity-55 filter blur-[0.6px]"
+          "opacity-45 sm:opacity-55 filter blur-[0.5px]"
         )}
       >
         <WindowFrame title={screens[nextScreenIdx].title} className="bg-mist/95 shadow-md">
@@ -264,7 +264,7 @@ export function HeroVisual() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.4 }}
-              className="pointer-events-none"
+              className="pointer-events-none text-xs"
             >
               {screens[nextScreenIdx].content}
             </motion.div>
@@ -272,7 +272,7 @@ export function HeroVisual() {
         </WindowFrame>
       </motion.div>
 
-      {/* Front Window (centered, z-10) */}
+      {/* Front Window: Center stage with AnimatePresence & 4px green progress bar */}
       <motion.div
         style={{
           y: shouldReduceMotion ? 0 : smoothFrontY,
@@ -280,21 +280,21 @@ export function HeroVisual() {
         className="relative z-10 w-full shadow-window"
       >
         <WindowFrame title={screens[activeScreen].title} className="bg-white">
-          <div aria-live="off" className="min-h-[220px] sm:min-h-[240px] flex flex-col justify-between">
+          <div aria-live="off" className="min-h-[195px] sm:min-h-[230px] flex flex-col justify-between">
             <AnimatePresence mode="wait">
               <motion.div
                 key={screens[activeScreen].id}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.25 }}
               >
                 {screens[activeScreen].content}
               </motion.div>
             </AnimatePresence>
 
-            <div className="mt-4 pt-3 border-t border-line/60 flex items-center justify-between text-[11px] text-ink-muted">
-              <span className="truncate pr-2">{screens[activeScreen].caption}</span>
+            <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-line/60 flex items-center justify-between text-[10px] sm:text-[11px] text-ink-muted">
+              <span className="truncate pr-2 max-w-[170px] sm:max-w-none">{screens[activeScreen].caption}</span>
 
               {/* Step indicator dots & accessible pause control */}
               <div className="flex items-center gap-1.5 shrink-0">
@@ -319,7 +319,7 @@ export function HeroVisual() {
                 <button
                   type="button"
                   onClick={() => setIsManualPaused(!isManualPaused)}
-                  className="ml-1 p-1 rounded hover:bg-mist text-ink-muted hover:text-ink transition-colors"
+                  className="ml-0.5 p-1 rounded hover:bg-mist text-ink-muted hover:text-ink transition-colors"
                   aria-pressed={isManualPaused}
                   aria-label={isManualPaused ? "Resume screen cycling" : "Pause screen cycling"}
                 >
@@ -334,7 +334,7 @@ export function HeroVisual() {
           </div>
 
           {/* 4px Green Progress Bar filling along the bottom edge */}
-          <div className="w-full h-1 bg-line/60 overflow-hidden rounded-b-[18px] -mx-4 -mb-4 mt-3 w-[calc(100%+2rem)]">
+          <div className="w-full h-1 bg-line/60 overflow-hidden rounded-b-[18px] -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 mt-3 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)]">
             <div
               className="h-full bg-green transition-[width] ease-linear"
               style={{
