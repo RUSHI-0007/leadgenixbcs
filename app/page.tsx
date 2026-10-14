@@ -1,101 +1,103 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { heroContent } from "@/data/home";
+import { Button } from "@/components/ui/Button";
+import { Scribble } from "@/components/ui/Scribble";
+import { BrushBg } from "@/components/ui/BrushBg";
+import { HeroVisual } from "@/components/sections/HeroVisual";
+import { Marquee } from "@/components/ui/Marquee";
+import { HomeStats } from "@/components/sections/HomeStats";
+import { AlternatingRows } from "@/components/sections/AlternatingRows";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { ResultsStrip } from "@/components/sections/ResultsStrip";
+import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
+import { HomeFaq } from "@/components/sections/HomeFaq";
+import { CtaBand } from "@/components/sections/CtaBand";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "B2B Lead Generation & Account-Based Marketing",
+  description:
+    "We help technology companies and channel partners identify high-value accounts, reach the right decision-makers, and turn conversations into qualified sales opportunities.",
+};
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex flex-col w-full overflow-hidden">
+      {/* 1. HERO (green, BrushBg green behind) */}
+      <section
+        aria-label="Hero"
+        className="relative pt-12 sm:pt-20 pb-16 sm:pb-28 overflow-hidden bg-white"
+      >
+        {/* Large green organic brush background */}
+        <BrushBg tone="green" shape={1} className="-top-12 -left-20" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8 text-left">
+              {/* Single H1 on page with tight grotesk styling and underline scribble */}
+              <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-extrabold tracking-[-0.04em] leading-[1.02] text-ink">
+                B2B Lead Generation That Delivers{" "}
+                <span className="relative inline-block text-green">
+                  Qualified Pipeline.
+                  <Scribble variant="underline" tone="green" isHero={true} />
+                </span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-ink-soft leading-relaxed max-w-2xl font-normal">
+                {heroContent.subheadline}
+              </p>
+
+              {/* Action Buttons: Primary green + Secondary white with border */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                <Button
+                  href={heroContent.primaryCta.href}
+                  variant="green"
+                  size="hero"
+                >
+                  {heroContent.primaryCta.label} →
+                </Button>
+
+                <Button
+                  href={heroContent.secondaryCta.href}
+                  variant="secondary"
+                  size="hero"
+                >
+                  {heroContent.secondaryCta.label}
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Side: Two overlapping WindowFrames at ±1.5deg angles */}
+            <div className="lg:col-span-5 flex justify-center">
+              <HeroVisual />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* 2. CLIENT MARQUEE STRIP */}
+      <Marquee />
+
+      {/* 3. STATS (mist background, TornEdge on top, 4 big 72px figures) */}
+      <HomeStats />
+
+      {/* 4. ALTERNATING ROWS A, B, C */}
+      <AlternatingRows />
+
+      {/* 5. SERVICES GRID (mist/indigo, BrushBg indigo, SegmentedTabs) */}
+      <ServicesGrid />
+
+      {/* 6. RESULTS STRIP (green, replaces testimonials, mint cards with highlight) */}
+      <ResultsStrip />
+
+      {/* 7. PROCESS (indigo, 4 columns, big numerals, hand-drawn dashed curve) */}
+      <ProcessTimeline />
+
+      {/* 8. FAQ ACCORDION (plain, left-aligned, only client doc Q&As) */}
+      <HomeFaq />
+
+      {/* 9. CLOSING CTA (TornEdge top, BrushBg green, light background) */}
+      <CtaBand />
     </div>
   );
 }

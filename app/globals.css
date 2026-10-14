@@ -3,25 +3,159 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #16231D;
+  --ink-soft: #4A5851;
+  --green: #1E9E62;
+  --green-tint: #E6F6EE;
+  --indigo: #4B55D8;
+  --indigo-tint: #EEF0FF;
+  --highlight: #FFE770;
+  --paper: #FFFFFF;
+  --mist: #F6F7FC;
+  --mint: #F4FAF7;
+  --line: #E4E7EF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+  overflow-x: clip;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background-color: var(--paper);
+  font-family: var(--font-hanken), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 19px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Ensure mobile form inputs don't trigger iOS Safari zoom */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Container query helper for mockups scaling as a unit */
+.mockup-container {
+  container-type: inline-size;
+}
+
+/* Hide floating action button when mobile menu is active */
+body.mobile-menu-open .floating-action-button {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Utilities for touch swipe containers */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Grotesk Headings: Heavy, tight, negative tracking, near-black green-ink */
+h1, .h1 {
+  font-family: var(--font-hanken), sans-serif;
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+h2, .h2 {
+  font-family: var(--font-hanken), sans-serif;
+  font-size: clamp(30px, 4.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+h3, .h3 {
+  font-family: var(--font-hanken), sans-serif;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* Accessible focus visible ring */
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 2px;
+}
+
+/* Highlight marker container */
+.highlight-marker {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Masked Edge Fade for Marquees */
+.mask-fade-edges {
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* Scribble drawing keyframes */
+@keyframes scribbleDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-scribble {
+  animation: scribbleDraw 0.7s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+/* Keyframes for Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Reduced motion media query */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-scribble {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+    flex-wrap: wrap !important;
   }
 }
