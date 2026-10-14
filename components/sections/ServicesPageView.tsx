@@ -41,7 +41,7 @@ export function ServicesPageView() {
   });
 
   const renderIcon = (iconName: string) => {
-    const props = { className: "w-7 h-7 text-indigo stroke-[1.5]", "aria-hidden": "true" as const };
+    const props = { className: "w-7 h-7 text-tomato stroke-[1.5]", "aria-hidden": "true" as const };
     switch (iconName) {
       case "calendar-check":
         return <CalendarCheck {...props} />;
@@ -72,7 +72,6 @@ export function ServicesPageView() {
           options={tabs}
           activeTab={activeTab}
           onChange={(tab) => setActiveTab(tab)}
-          tone="indigo"
         />
       </div>
 
@@ -91,7 +90,7 @@ export function ServicesPageView() {
             }}
             role="button"
             tabIndex={0}
-            className="rounded-card border border-line bg-white p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-indigo/50 hover:shadow-card cursor-pointer group text-left"
+            className="rounded-card border border-line bg-card p-6 sm:p-8 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:border-tomato hover:shadow-card cursor-pointer group text-left"
             aria-label={`View deliverables for ${service.title}`}
           >
             <div className="space-y-4">
@@ -104,7 +103,7 @@ export function ServicesPageView() {
                 </span>
               </div>
 
-              <h3 className="font-heading font-bold text-xl text-ink group-hover:text-indigo transition-colors">
+              <h3 className="font-heading font-bold text-xl text-ink group-hover:text-tomato-ink transition-colors">
                 {service.title}
               </h3>
 
@@ -113,7 +112,7 @@ export function ServicesPageView() {
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-line/60 flex items-center justify-between text-xs font-bold text-indigo group-hover:underline">
+            <div className="pt-6 mt-6 border-t border-line/60 flex items-center justify-between text-xs font-bold text-tomato-ink group-hover:underline">
               <span>View deliverables ({service.deliverables.length})</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </div>
@@ -138,10 +137,10 @@ export function ServicesPageView() {
                 {activeModalService.deliverables.map((item, idx) => (
                   <div
                     key={item}
-                    className="flex items-center justify-between py-2.5 px-2 hover:bg-mist transition-colors rounded"
+                    className="flex items-center justify-between py-2.5 px-2 hover:bg-paper-deep transition-colors rounded"
                   >
                     <div className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-indigo shrink-0" aria-hidden="true" />
+                      <CheckCircle2 className="w-4 h-4 text-tomato-ink shrink-0" aria-hidden="true" />
                       <span className="text-xs sm:text-sm font-medium text-ink">
                         {item}
                       </span>
@@ -158,8 +157,8 @@ export function ServicesPageView() {
               <span className="text-xs text-ink-muted font-mono">
                 Monthly cycle • Managed execution
               </span>
-              <Button href="/contact" variant="indigo" size="md">
-                Inquire about this service →
+              <Button href="/contact" variant="ink" size="md" rightIcon={<span>→</span>}>
+                Inquire about this service
               </Button>
             </div>
           </div>

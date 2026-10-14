@@ -4,28 +4,24 @@ import { cn } from "@/lib/utils";
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  tone?: "indigo" | "green" | "neutral";
+  isDark?: boolean;
   hoverEffect?: boolean;
 }
 
 export function Card({
   children,
   className = "",
-  tone = "indigo",
+  isDark = false,
   hoverEffect = true,
   ...props
 }: CardProps) {
-  const toneStyles = {
-    indigo: "border-line hover:border-indigo/50 hover:shadow-card",
-    green: "border-line hover:border-green/50 hover:shadow-cardGreen",
-    neutral: "border-line hover:border-ink/20",
-  };
-
   return (
     <div
       className={cn(
-        "rounded-card border bg-white p-6 sm:p-8 transition-all duration-200",
-        toneStyles[tone],
+        "rounded-card border transition-all duration-200 p-6 sm:p-8",
+        isDark
+          ? "bg-ink border-line-dark text-paper hover:border-tomato hover:shadow-cardDark"
+          : "bg-card border-line text-ink hover:border-tomato hover:shadow-card",
         hoverEffect && "hover:-translate-y-1",
         className
       )}

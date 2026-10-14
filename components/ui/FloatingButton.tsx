@@ -14,9 +14,9 @@ export function FloatingButton() {
       <Link
         href="/contact"
         aria-label="Book a consultation"
-        className="flex items-center justify-center w-14 h-14 rounded-full bg-green text-white shadow-green hover:bg-green-dark hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green"
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-tomato text-ink shadow-tomatoCta hover:bg-tomato-hover hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none"
       >
-        <Mail className="w-6 h-6 stroke-[2]" aria-hidden="true" />
+        <Mail className="w-6 h-6 stroke-[2.5] text-ink" aria-hidden="true" />
       </Link>
     </aside>
   );

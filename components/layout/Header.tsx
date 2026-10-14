@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/navigation";
 import { LeadGenixLogo } from "@/components/ui/LeadGenixLogo";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -51,8 +51,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full bg-white transition-all duration-200",
-        isScrolled ? "border-b border-line shadow-[0_2px_12px_rgba(22,35,29,0.03)] py-3.5" : "border-b border-transparent py-5"
+        "sticky top-0 z-40 w-full bg-paper transition-all duration-200",
+        isScrolled
+          ? "border-b border-line shadow-sm py-3.5"
+          : "border-b border-transparent py-5"
       )}
     >
       <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -68,10 +70,8 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-[13px] font-bold uppercase tracking-[0.08em] transition-colors py-1",
-                  isActive
-                    ? "text-green"
-                    : "text-ink hover:text-green"
+                  "text-[13px] font-bold uppercase tracking-[0.08em] text-ink transition-colors py-1 relative",
+                  isActive && "after:content-[''] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-tomato"
                 )}
               >
                 {link.label}
@@ -80,14 +80,19 @@ export function Header() {
           })}
         </nav>
 
-        {/* Desktop CTA Button: Soft tinted button */}
+        {/* Desktop CTA Button: Ink fill, paper text, tomato '→' */}
         <div className="hidden lg:flex items-center">
           <Link
             href={siteConfig.ctaButton.href}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-button bg-green-tint text-green text-[13px] font-bold uppercase tracking-[0.06em] hover:bg-green-tint/80 transition-all duration-200 active:scale-95"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-button bg-ink text-paper text-[13px] font-bold uppercase tracking-[0.06em] hover:bg-ink-deep transition-all duration-150 active:scale-95 shadow-sm"
           >
             <span>SCHEDULE CONSULTATION</span>
-            <span aria-hidden="true">→</span>
+            <span
+              className="text-tomato font-bold text-base transition-transform duration-150 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              →
+            </span>
           </Link>
         </div>
 
@@ -95,7 +100,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg text-ink hover:bg-mist transition-colors"
+          className="lg:hidden p-2 rounded-lg text-ink hover:bg-paper-deep transition-colors"
           aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
           aria-expanded={isMobileMenuOpen}
         >
@@ -110,7 +115,7 @@ export function Header() {
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 top-[65px] bg-white z-50 flex flex-col justify-between p-6 overflow-y-auto lg:hidden animate-fadeIn"
+          className="fixed inset-0 top-[65px] bg-paper z-50 flex flex-col justify-between p-6 overflow-y-auto lg:hidden animate-fadeIn"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Drawer"
@@ -124,11 +129,13 @@ export function Header() {
                   href={link.href}
                   className={cn(
                     "flex items-center justify-between px-3 py-3 rounded-lg text-base font-bold uppercase tracking-[0.08em] transition-colors",
-                    isActive ? "text-green bg-green-tint/40" : "text-ink hover:text-green"
+                    isActive
+                      ? "text-ink bg-tomato-tint/50 border-l-[3px] border-tomato font-extrabold"
+                      : "text-ink hover:bg-paper-deep"
                   )}
                 >
                   <span>{link.label}</span>
-                  <ArrowRight className="w-4 h-4 opacity-50" aria-hidden="true" />
+                  <span className="text-tomato font-bold text-base" aria-hidden="true">→</span>
                 </Link>
               );
             })}
@@ -137,9 +144,10 @@ export function Header() {
           <div className="pt-8 pb-4 border-t border-line flex flex-col space-y-4">
             <Link
               href={siteConfig.ctaButton.href}
-              className="w-full text-center py-3.5 rounded-button bg-green text-white text-sm font-bold uppercase tracking-wider shadow-green"
+              className="group w-full text-center py-3.5 rounded-button bg-ink text-paper text-sm font-bold uppercase tracking-wider hover:bg-ink-deep transition-all duration-150 flex items-center justify-center gap-2"
             >
-              SCHEDULE CONSULTATION →
+              <span>SCHEDULE CONSULTATION</span>
+              <span className="text-tomato font-bold text-base transition-transform duration-150 group-hover:translate-x-1" aria-hidden="true">→</span>
             </Link>
             <p className="text-center text-xs text-ink-muted">
               {siteConfig.tagline}

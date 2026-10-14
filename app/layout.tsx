@@ -4,19 +4,18 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingButton } from "@/components/ui/FloatingButton";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 
 const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-hanken",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
   display: "swap",
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -53,16 +52,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${hankenGrotesk.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen flex flex-col font-sans bg-paper text-ink antialiased selection:bg-highlight selection:text-ink">
+      <body className="min-h-screen flex flex-col font-sans bg-paper text-ink antialiased">
+        {/* Thin 3px tomato scroll progress bar at very top of viewport */}
+        <ScrollProgressBar />
+
         {/* Accessible skip link */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-ink focus:text-white focus:font-bold focus:rounded-button focus:shadow-md focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-ink focus:text-paper focus:font-bold focus:rounded-button focus:shadow-md focus:outline-none"
         >
           Skip to main content
         </a>
 
-        {/* Global static.app-style header */}
+        {/* Header */}
         <Header />
 
         {/* Semantic main landmark */}
@@ -70,7 +72,7 @@ export default function RootLayout({
           {children}
         </main>
 
-        {/* Global footer */}
+        {/* Footer */}
         <Footer />
 
         {/* Floating consultation action button */}

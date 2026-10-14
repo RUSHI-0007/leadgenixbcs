@@ -91,8 +91,9 @@ export function ContactForm() {
           role="status"
           aria-live="polite"
         >
-          <div className="w-16 h-16 rounded-full bg-green-tint text-green flex items-center justify-center mx-auto shadow-sm">
-            <CheckCircle2 className="w-9 h-9 stroke-[2.5]" aria-hidden="true" />
+          {/* Success state: ink check icon in a --tomato-tint circle with ink text. */}
+          <div className="w-16 h-16 rounded-full bg-tomato-tint text-ink flex items-center justify-center mx-auto shadow-sm">
+            <CheckCircle2 className="w-9 h-9 stroke-[2.5] text-ink" aria-hidden="true" />
           </div>
 
           <div className="space-y-2 max-w-md">
@@ -124,8 +125,8 @@ export function ContactForm() {
     <WindowFrame title="schedule-consultation.spec" className="shadow-window">
       {/* Top Session Badge */}
       <div className="mb-6 pb-4 border-b border-line flex flex-wrap items-center justify-between gap-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-green-tint text-green text-xs font-mono font-bold uppercase tracking-wider">
-          <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-tomato-tint text-tomato-ink text-xs font-mono font-bold uppercase tracking-wider">
+          <span className="w-2 h-2 rounded-full bg-tomato animate-pulse" />
           <span>Free Strategy Session</span>
         </div>
         <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">
@@ -232,29 +233,30 @@ export function ContactForm() {
           />
         </div>
 
-        {/* Action Button */}
+        {/* Action Button: ink-filled with paper text and tomato arrow */}
         <div className="pt-2">
           <Button
             type="submit"
-            variant="green"
+            variant="ink"
             size="lg"
             className="w-full text-center"
             disabled={isSubmitting}
+            rightIcon={<span className="text-tomato font-black">→</span>}
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
-                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-paper/30 border-t-paper rounded-full animate-spin" />
                 <span>Processing Consultation Request...</span>
               </span>
             ) : (
-              <span>{consultationFormContent.submitButtonLabel} →</span>
+              <span>{consultationFormContent.submitButtonLabel}</span>
             )}
           </Button>
         </div>
 
-        {/* Security / Privacy reassurance notice */}
+        {/* Security / Privacy notice */}
         <div className="pt-2 flex items-center justify-center gap-2 text-xs text-ink-muted">
-          <ShieldCheck className="w-4 h-4 text-green shrink-0" aria-hidden="true" />
+          <ShieldCheck className="w-4 h-4 text-ink-soft shrink-0" aria-hidden="true" />
           <span>Strict Enterprise Confidentiality • No Spam Policy</span>
         </div>
       </form>

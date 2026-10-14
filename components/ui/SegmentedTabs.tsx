@@ -13,7 +13,8 @@ interface SegmentedTabsProps<T extends string = string> {
   options: TabOption<T>[];
   activeTab: T;
   onChange: (tabId: T) => void;
-  tone?: "green" | "indigo";
+  isDark?: boolean;
+  tone?: string; // for backward compatibility
   className?: string;
 }
 
@@ -21,18 +22,17 @@ export function SegmentedTabs<T extends string = string>({
   options,
   activeTab,
   onChange,
-  tone = "indigo",
+  isDark = false,
   className = "",
 }: SegmentedTabsProps<T>) {
-  const trackBg = tone === "green" ? "bg-green-tint" : "bg-indigo-tint";
-  const activeColor = tone === "green" ? "text-green" : "text-indigo";
-
   return (
     <div
       role="tablist"
       className={cn(
-        "inline-flex items-center p-1.5 rounded-full select-none",
-        trackBg,
+        "inline-flex items-center p-1.5 rounded-full select-none transition-colors",
+        isDark
+          ? "bg-ink-deep border border-line-dark"
+          : "bg-tomato-tint border border-tomato-tint/50",
         className
       )}
     >
@@ -46,9 +46,13 @@ export function SegmentedTabs<T extends string = string>({
             aria-selected={isActive}
             onClick={() => onChange(option.id)}
             className={cn(
-              "relative px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-heading font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo",
-              isActive
-                ? cn("bg-white text-ink shadow-sm", activeColor)
+              "relative px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-heading font-bold transition-all duration-200 focus-visible:outline-none",
+              isDark
+                ? isActive
+                  ? "bg-paper text-ink shadow-sm"
+                  : "text-paper/75 hover:text-paper"
+                : isActive
+                ? "bg-card text-ink shadow-sm"
                 : "text-ink-soft hover:text-ink"
             )}
           >

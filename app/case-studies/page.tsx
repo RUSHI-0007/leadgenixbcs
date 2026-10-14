@@ -14,17 +14,17 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
-      {/* 1. Header (green accent) */}
-      <section aria-label="Case Studies Header" className="relative py-20 sm:py-28 bg-white border-b border-line overflow-hidden">
-        <BrushBg tone="green" shape={1} className="-top-12 -left-20" />
+      {/* 1. Header (--paper) */}
+      <section aria-label="Case Studies Header" className="relative py-20 sm:py-28 bg-paper paper-grain border-b border-line overflow-hidden">
+        <BrushBg tone="tomato" shape={1} className="-top-12 -left-20" />
 
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-extrabold text-ink tracking-tight leading-[1.02]">
               Results that{" "}
-              <span className="relative inline-block text-green">
+              <span className="relative inline-block text-tomato-ink">
                 speak.
-                <Scribble variant="underline" tone="green" />
+                <Scribble variant="underline" tone="tomato" />
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-ink-soft leading-relaxed font-normal">
@@ -34,9 +34,9 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      {/* 2. Main Filterable Grid */}
-      <section aria-label="Campaign Case Studies" className="py-20 sm:py-28 bg-mist">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. Main Filterable Grid (--paper-deep) */}
+      <section aria-label="Campaign Case Studies" className="py-20 sm:py-28 bg-paper-deep paper-grain">
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <CaseStudiesView />
         </div>
       </section>

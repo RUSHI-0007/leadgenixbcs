@@ -43,17 +43,17 @@ export function ResultsStrip() {
         role="button"
         tabIndex={0}
         className={cn(
-          "w-[320px] sm:w-[380px] lg:w-[420px] shrink-0 p-6 sm:p-7 rounded-[20px] bg-mint",
-          "border border-line/50 transition-all duration-200",
-          "hover:-translate-y-1.5 hover:shadow-cardGreen hover:border-green/40",
+          "w-[320px] sm:w-[380px] lg:w-[420px] shrink-0 p-6 sm:p-7 rounded-[20px] bg-card",
+          "border border-line transition-all duration-200",
+          "hover:-translate-y-1.5 hover:shadow-card hover:border-tomato",
           "cursor-pointer select-none text-left flex flex-col justify-between"
         )}
         aria-label={`View ${study.client} case study results`}
       >
         <div className="space-y-4">
-          {/* Monogram circle + Client + Campaign type */}
+          {/* Monogram circle --tomato-tint with --tomato-ink initials */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-paper border border-line flex items-center justify-center font-heading font-bold text-xs text-ink shrink-0">
+            <div className="w-10 h-10 rounded-full bg-tomato-tint flex items-center justify-center font-heading font-extrabold text-xs text-tomato-ink shrink-0">
               {initials}
             </div>
             <div>
@@ -66,9 +66,9 @@ export function ResultsStrip() {
             </div>
           </div>
 
-          {/* Big figure with yellow highlight */}
+          {/* Big figure at 40px 800 in ink with tomato marker highlight behind it */}
           <div className="pt-2">
-            <div className="font-heading font-black text-3xl sm:text-4xl text-ink tracking-tight">
+            <div className="font-heading font-extrabold text-[36px] sm:text-[40px] text-ink leading-tight tracking-tight">
               <Highlight>{keyMetric}</Highlight>
             </div>
             <p className="text-xs text-ink-muted mt-1 font-mono uppercase tracking-wider">
@@ -82,7 +82,7 @@ export function ResultsStrip() {
           </p>
         </div>
 
-        <div className="pt-4 mt-4 border-t border-line/60 flex items-center justify-between text-xs font-bold text-green">
+        <div className="pt-4 mt-4 border-t border-line/60 flex items-center justify-between text-xs font-bold text-tomato-ink">
           <span>View campaign data</span>
           <span aria-hidden="true">→</span>
         </div>
@@ -93,14 +93,14 @@ export function ResultsStrip() {
   return (
     <section
       aria-label="Campaign Results"
-      className="py-24 sm:py-32 bg-white overflow-hidden"
+      className="py-24 sm:py-32 bg-paper overflow-hidden"
     >
       <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight">
           Results, not{" "}
-          <span className="relative inline-block text-green">
+          <span className="relative inline-block text-ink">
             promises.
-            <Scribble variant="underline" tone="green" />
+            <Scribble variant="underline" tone="tomato" />
           </span>
         </h2>
       </div>

@@ -37,7 +37,6 @@ export function CaseStudiesView() {
           options={tabs}
           activeTab={selectedCategory}
           onChange={(tab) => setSelectedCategory(tab)}
-          tone="green"
         />
       </div>
 

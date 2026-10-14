@@ -14,17 +14,17 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <div className="flex flex-col w-full overflow-hidden">
-      {/* 1. Header (indigo accent) */}
-      <section aria-label="Services Header" className="relative py-20 sm:py-28 bg-white border-b border-line overflow-hidden">
-        <BrushBg tone="indigo" shape={3} className="-top-12 -right-20" />
+      {/* 1. Header (--paper) */}
+      <section aria-label="Services Header" className="relative py-20 sm:py-28 bg-paper paper-grain border-b border-line overflow-hidden">
+        <BrushBg tone="tomato" shape={3} className="-top-12 -right-20" />
 
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-extrabold text-ink tracking-tight leading-[1.02]">
               Marketing{" "}
-              <span className="relative inline-block text-indigo">
+              <span className="relative inline-block text-tomato-ink">
                 services.
-                <Scribble variant="underline" tone="indigo" />
+                <Scribble variant="underline" tone="tomato" />
               </span>
             </h1>
             <p className="text-lg sm:text-xl text-ink-soft leading-relaxed font-normal">
@@ -34,9 +34,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 2. Main Interactive Catalog */}
-      <section aria-label="Service Catalog" className="py-20 sm:py-28 bg-mist">
-        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 2. Main Interactive Catalog (--paper-deep) */}
+      <section aria-label="Service Catalog" className="py-20 sm:py-28 bg-paper-deep paper-grain">
+        <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <ServicesPageView />
         </div>
       </section>

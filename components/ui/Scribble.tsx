@@ -14,16 +14,18 @@ import { cn } from "@/lib/utils";
 
 interface ScribbleProps {
   variant?: "underline" | "circle";
-  tone?: "green" | "indigo" | "ink";
+  tone?: "tomato" | "ink";
   className?: string;
   isHero?: boolean;
+  isDark?: boolean;
 }
 
 export function Scribble({
   variant = "underline",
-  tone = "green",
+  tone = "tomato",
   className = "",
   isHero = false,
+  isDark = false,
 }: ScribbleProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -58,12 +60,13 @@ export function Scribble({
   }, [isHero, shouldReduceMotion, heroOffset]);
 
   const toneColors = {
-    green: "#1E9E62",
-    indigo: "#4B55D8",
-    ink: "#16231D",
+    tomato: "#FE5E56",
+    ink: "#3F3F3F",
   };
 
   const strokeColor = toneColors[tone];
+  const underlineStrokeWidth = isDark ? "9" : "7.5";
+  const circleStrokeWidth = isDark ? "8" : "7";
 
   // Pick animated or static dashoffset
   const activeDashOffset = shouldReduceMotion
@@ -114,7 +117,7 @@ export function Scribble({
           <motion.path
             d="M 4 12 C 55 15, 115 16, 170 13 C 190 12, 206 10, 214 7 C 216 6, 218 5, 219 3"
             stroke={strokeColor}
-            strokeWidth="8"
+            strokeWidth={underlineStrokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
             filter={`url(#${filterId})`}
@@ -129,7 +132,7 @@ export function Scribble({
           <motion.path
             d="M 152 16 C 178 24, 192 42, 186 60 C 178 78, 140 85, 98 84 C 56 83, 14 74, 8 50 C 3 26, 45 10, 96 9 C 134 8, 165 14, 172 22 C 178 28, 180 38, 174 44"
             stroke={strokeColor}
-            strokeWidth="7"
+            strokeWidth={circleStrokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
             filter={`url(#${filterId})`}

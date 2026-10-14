@@ -16,13 +16,19 @@ interface HighlightProps {
   children: React.ReactNode;
   className?: string;
   isHero?: boolean;
+  isDark?: boolean;
 }
 
-export function Highlight({ children, className = "", isHero = false }: HighlightProps) {
+export function Highlight({
+  children,
+  className = "",
+  isHero = false,
+  isDark = false,
+}: HighlightProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  // Scroll-linked marker fill (offset slightly later than scribble: 82% -> 48%)
+  // Scroll-linked marker fill
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 84%", "start 48%"],
@@ -58,12 +64,21 @@ export function Highlight({ children, className = "", isHero = false }: Highligh
   return (
     <span
       ref={containerRef}
-      className={cn("relative inline-block whitespace-nowrap font-inherit", className)}
+      className={cn(
+        "relative inline-block whitespace-nowrap font-inherit",
+        isDark ? "text-paper" : "text-ink",
+        className
+      )}
     >
-      {/* Animated yellow marker bar */}
+      {/* Tomato marker bar */}
       <motion.span
         aria-hidden="true"
-        className="pointer-events-none absolute -left-1 -right-1 top-[14%] bottom-[6%] bg-highlight rounded-[3px] -rotate-1 skew-x-[-2deg] -z-1 mix-blend-multiply"
+        className={cn(
+          "pointer-events-none absolute -left-1 -right-1 top-[14%] bottom-[6%] rounded-[3px] -rotate-1 skew-x-[-2deg] -z-1",
+          isDark
+            ? "bg-[rgba(254,94,86,0.55)] mix-blend-screen"
+            : "bg-[rgba(254,94,86,0.35)] mix-blend-multiply"
+        )}
         style={{
           scaleX: activeScaleX,
           transformOrigin: "left",

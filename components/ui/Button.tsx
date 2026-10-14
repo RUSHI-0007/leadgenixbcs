@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "green" | "indigo" | "secondary" | "tintGreen" | "tintIndigo" | "dark";
-  size?: "sm" | "md" | "hero";
+  variant?: "tomato" | "ink" | "secondary" | "paper" | "dark";
+  size?: "sm" | "md" | "lg" | "hero";
   href?: string;
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -15,7 +15,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export function Button({
   children,
   className = "",
-  variant = "green",
+  variant = "ink",
   size = "md",
   href,
   isLoading = false,
@@ -24,40 +24,51 @@ export function Button({
   rightIcon,
   ...props
 }: ButtonProps) {
-  const baseStyles =
-    "inline-flex items-center justify-center font-heading font-bold rounded-button transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed select-none";
+  const activeVariant: "tomato" | "ink" | "secondary" | "paper" =
+    variant === "tomato"
+      ? "tomato"
+      : variant === "secondary"
+      ? "secondary"
+      : variant === "paper"
+      ? "paper"
+      : "ink";
 
+  const baseStyles =
+    "group inline-flex items-center justify-center font-heading rounded-button transition-all duration-150 focus-visible:outline-none select-none disabled:opacity-50 disabled:cursor-not-allowed";
+
+  // Font size rules:
+  // Tomato button: font-weight 800, font-size >= 18.7px (text-[19px])
+  // Smaller buttons: ink-filled with paper text and tomato arrow
   const sizeStyles = {
-    sm: "text-xs uppercase tracking-wider px-4 py-2 gap-1.5",
-    md: "text-base px-6 py-3.5 gap-2",
-    hero: "text-lg px-8 py-4 gap-2.5",
+    sm: "text-xs uppercase tracking-wider px-4 py-2 gap-1.5 font-bold",
+    md: "text-[15px] px-6 py-3.5 gap-2 font-bold",
+    lg: activeVariant === "tomato"
+      ? "text-[19px] font-extrabold px-7 py-4 gap-2.5"
+      : "text-base font-bold px-7 py-4 gap-2.5",
+    hero: "text-[19px] sm:text-[20px] font-extrabold px-8 py-4 gap-2.5",
   };
 
   const variantStyles = {
-    green:
-      "bg-green text-white shadow-green hover:bg-green-dark hover:-translate-y-0.5 border border-transparent focus-visible:ring-green",
-    indigo:
-      "bg-indigo text-white shadow-indigo hover:bg-indigo-dark hover:-translate-y-0.5 border border-transparent focus-visible:ring-indigo",
+    tomato:
+      "bg-tomato text-ink font-extrabold shadow-tomatoCta hover:bg-tomato-hover active:scale-[0.98] border border-transparent",
+    ink:
+      "bg-ink text-paper font-bold hover:bg-ink-deep active:scale-[0.98] border border-transparent",
     secondary:
-      "bg-white text-ink border border-line hover:border-ink/30 hover:bg-mist hover:-translate-y-0.5 focus-visible:ring-ink",
-    tintGreen:
-      "bg-green-tint text-green hover:bg-green-tint/80 focus-visible:ring-green border border-transparent",
-    tintIndigo:
-      "bg-indigo-tint text-indigo hover:bg-indigo-tint/80 focus-visible:ring-indigo border border-transparent",
-    dark:
-      "bg-ink text-white hover:bg-ink/90 hover:-translate-y-0.5 border border-transparent focus-visible:ring-ink",
+      "bg-transparent text-ink font-bold border-2 border-ink hover:bg-ink/5 active:scale-[0.98]",
+    paper:
+      "bg-paper text-ink font-bold hover:bg-paper-deep active:scale-[0.98] border border-line",
   };
 
   const content = (
     <>
       {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+        <Loader2 className="w-4 h-4 animate-spin shrink-0" aria-hidden="true" />
       ) : (
         leftIcon && <span className="inline-flex shrink-0">{leftIcon}</span>
       )}
       <span>{children}</span>
       {!isLoading && rightIcon && (
-        <span className="inline-flex shrink-0 transition-transform group-hover:translate-x-0.5">
+        <span className="inline-flex shrink-0 transition-transform duration-150 group-hover:translate-x-1 text-tomato">
           {rightIcon}
         </span>
       )}
@@ -68,7 +79,7 @@ export function Button({
     return (
       <Link
         href={href}
-        className={cn(baseStyles, sizeStyles[size], variantStyles[variant], className)}
+        className={cn(baseStyles, sizeStyles[size], variantStyles[activeVariant], className)}
       >
         {content}
       </Link>
@@ -77,7 +88,7 @@ export function Button({
 
   return (
     <button
-      className={cn(baseStyles, sizeStyles[size], variantStyles[variant], className)}
+      className={cn(baseStyles, sizeStyles[size], variantStyles[activeVariant], className)}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
       {...props}

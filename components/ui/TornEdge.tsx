@@ -9,7 +9,7 @@ interface TornEdgeProps {
 
 export function TornEdge({
   position = "top",
-  fill = "#F6F7FC", // Default to --mist
+  fill = "#F6F2EC", // Default to --paper
   className = "",
 }: TornEdgeProps) {
   return (

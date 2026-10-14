@@ -3,7 +3,6 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { Scribble } from "@/components/ui/Scribble";
-import { BrushBg } from "@/components/ui/BrushBg";
 import { TornEdge } from "@/components/ui/TornEdge";
 
 interface CtaBandProps {
@@ -17,18 +16,20 @@ interface CtaBandProps {
 export function CtaBand({
   headline,
   subheadline = "Let's discuss how a structured lead generation and ABM program can strengthen your pipeline and drive measurable growth.",
-  buttonLabel = "Schedule Consultation →",
+  buttonLabel = "Schedule Consultation",
   buttonHref = "/contact",
   scribbleWord,
 }: CtaBandProps) {
+  const cleanButtonLabel = buttonLabel.replace(/\s*→\s*$/, "");
+
   const renderHeadline = () => {
     if (!headline) {
       return (
         <>
           Ready to talk{" "}
-          <span className="relative inline-block text-green">
+          <span className="relative inline-block text-ink">
             strategy
-            <Scribble variant="underline" tone="green" />
+            <Scribble variant="underline" tone="ink" />
           </span>
           ?
         </>
@@ -40,9 +41,9 @@ export function CtaBand({
       return (
         <>
           {parts[0]}
-          <span className="relative inline-block text-green">
+          <span className="relative inline-block text-ink">
             {scribbleWord}
-            <Scribble variant="underline" tone="green" />
+            <Scribble variant="underline" tone="ink" />
           </span>
           {parts.slice(1).join(scribbleWord)}
         </>
@@ -54,38 +55,35 @@ export function CtaBand({
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* TornEdge top */}
-      <TornEdge position="top" fill="#F4FAF7" />
+      {/* TornEdge top transitioning into solid tomato band */}
+      <TornEdge position="top" fill="#FE5E56" />
 
       <section
         aria-label="Call to Action"
-        className="relative py-24 sm:py-32 bg-mint text-ink overflow-hidden text-center"
+        className="relative py-24 sm:py-32 bg-tomato text-ink overflow-hidden text-center"
       >
-        {/* Faint green organic brush background */}
-        <BrushBg
-          tone="green"
-          shape={2}
-          className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-125"
-        />
-
         <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink tracking-tight leading-[1.05]">
+            {/* Heading in --ink (large, 800) with ink underline scribble */}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ink tracking-tight leading-[1.05]">
               {renderHeadline()}
             </h2>
 
-            <p className="text-base sm:text-lg text-ink-soft leading-relaxed max-w-xl mx-auto font-normal">
+            {/* Sub text --ink; must be >= 20px weight 600 for contrast */}
+            <p className="text-xl sm:text-2xl font-semibold text-ink leading-relaxed max-w-xl mx-auto">
               {subheadline}
             </p>
 
+            {/* Button INK fill with paper text and tomato arrow (inverted CTA) */}
             <div className="pt-4 flex justify-center">
               <Button
                 href={buttonHref}
-                variant="green"
+                variant="ink"
                 size="hero"
-                className="w-full sm:w-auto text-center"
+                className="w-full sm:w-auto text-center shadow-md hover:bg-ink-deep font-extrabold text-[19px]"
+                rightIcon={<span className="text-tomato font-black">→</span>}
               >
-                {buttonLabel}
+                {cleanButtonLabel}
               </Button>
             </div>
           </div>

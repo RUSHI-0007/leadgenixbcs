@@ -42,7 +42,7 @@ export function CaseStudyModal({ caseStudy, isOpen, onClose }: CaseStudyModalPro
               {caseStudy.solutions.map((sol) => (
                 <span
                   key={sol}
-                  className="font-mono text-xs px-2.5 py-1 rounded bg-indigo-tint/70 text-indigo border border-indigo/20 font-medium"
+                  className="font-mono text-xs px-2.5 py-1 rounded bg-tomato-tint text-tomato-ink border border-tomato-tint/80 font-bold"
                 >
                   {sol}
                 </span>
@@ -71,10 +71,10 @@ export function CaseStudyModal({ caseStudy, isOpen, onClose }: CaseStudyModalPro
                 </div>
               ))}
               {caseStudy.computedRates.map((cr, idx) => (
-                <div key={idx} className="flex justify-between py-2 text-xs sm:text-sm text-ink-soft bg-mint/50 px-2 rounded">
+                <div key={idx} className="flex justify-between py-2 text-xs sm:text-sm text-ink-soft bg-tomato-tint/50 px-2 rounded">
                   <span>{cr.label}</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-green font-mono">{cr.formatted}</span>
+                    <span className="font-bold text-tomato-ink font-mono">{cr.formatted}</span>
                     {cr.comment && (
                       <span className="text-[11px] text-ink-muted font-mono">
                         ({cr.comment})
@@ -102,7 +102,7 @@ export function CaseStudyModal({ caseStudy, isOpen, onClose }: CaseStudyModalPro
           </div>
 
           {/* Business Outcome */}
-          <div className="p-4 rounded-card bg-mist border border-line space-y-1">
+          <div className="p-4 rounded-card bg-paper-deep border border-line space-y-1">
             <span className="text-xs font-mono uppercase tracking-wider text-ink-muted block">
               Business outcome
             </span>

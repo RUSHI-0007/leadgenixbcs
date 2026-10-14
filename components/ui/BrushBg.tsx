@@ -2,18 +2,31 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface BrushBgProps {
-  tone?: "green" | "indigo";
+  tone?: "tomato" | "ink" | "paper";
   shape?: 1 | 2 | 3;
   className?: string;
 }
 
-export function BrushBg({ tone = "green", shape = 1, className = "" }: BrushBgProps) {
-  const fillColor = tone === "green" ? "#1E9E62" : "#4B55D8";
+export function BrushBg({ tone = "tomato", shape = 1, className = "" }: BrushBgProps) {
+  // Brand tones: tomato rgba(254,94,86,0.09), ink rgba(63,63,63,0.05), paper rgba(246,242,236,0.05)
+  const normalizedTone =
+    tone === "tomato"
+      ? "tomato"
+      : tone === "paper"
+      ? "paper"
+      : "ink";
+
+  const fillColor =
+    normalizedTone === "tomato"
+      ? "rgba(254, 94, 86, 0.09)"
+      : normalizedTone === "paper"
+      ? "rgba(246, 242, 236, 0.05)"
+      : "rgba(63, 63, 63, 0.05)";
 
   return (
     <div
       className={cn(
-        "pointer-events-none absolute -z-10 select-none overflow-hidden opacity-[0.06] transition-opacity",
+        "pointer-events-none absolute -z-10 select-none overflow-hidden transition-opacity",
         "w-[420px] h-[340px] sm:w-[650px] sm:h-[500px] lg:w-[800px] lg:h-[600px] max-w-[100vw]",
         className
       )}
@@ -35,7 +48,7 @@ export function BrushBg({ tone = "green", shape = 1, className = "" }: BrushBgPr
           <path
             d="M 120 400 C 200 160, 480 80, 680 200 C 580 380, 380 500, 180 480 Z"
             fill={fillColor}
-            opacity="0.5"
+            opacity="0.6"
           />
         </svg>
       )}
@@ -55,7 +68,8 @@ export function BrushBg({ tone = "green", shape = 1, className = "" }: BrushBgPr
           />
           <path
             d="M 360 160 C 470 160, 540 240, 530 360 C 520 470, 430 530, 330 520 C 220 510, 160 420, 170 310 C 180 220, 260 160, 360 160 Z"
-            fill="#FFFFFF"
+            fill={fillColor}
+            opacity="0.5"
           />
         </svg>
       )}

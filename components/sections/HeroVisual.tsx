@@ -108,7 +108,7 @@ export function HeroVisual() {
           </div>
           <div className="flex items-center justify-between pt-2 sm:pt-3 pb-1">
             <span className="text-xs sm:text-sm font-semibold text-ink">Success rate</span>
-            <span className="font-heading font-black text-base sm:text-xl text-green font-mono">
+            <span className="font-heading font-black text-base sm:text-xl text-ink font-mono">
               <Highlight isHero={true}>{rubrikStudy?.computedRates[0].formatted || "72%"}</Highlight>
             </span>
           </div>
@@ -129,14 +129,14 @@ export function HeroVisual() {
             <span className="text-ink-soft">Confirmations</span>
             <span className="font-bold text-ink font-mono">
               {nobelStudy?.rawMetrics.attendanceConfirmations || 86}{" "}
-              <span className="text-green text-[11px] sm:text-xs">({nobelStudy?.computedRates[0].formatted || "81.9%"})</span>
+              <span className="text-tomato-ink text-[11px] sm:text-xs font-mono font-bold">({nobelStudy?.computedRates[0].formatted || "81.9%"})</span>
             </span>
           </div>
           <div className="flex items-center justify-between py-2 sm:py-2.5 text-xs sm:text-sm">
             <span className="text-ink-soft">Actual participants</span>
             <span className="font-bold text-ink font-mono">
               {nobelStudy?.rawMetrics.actualParticipants || 52}{" "}
-              <span className="text-green text-[11px] sm:text-xs">({nobelStudy?.computedRates[1].formatted || "60.47%"})</span>
+              <span className="text-tomato-ink text-[11px] sm:text-xs font-mono font-bold">({nobelStudy?.computedRates[1].formatted || "60.47%"})</span>
             </span>
           </div>
           <div className="flex items-center justify-between pt-2 sm:pt-3 pb-1">
@@ -228,7 +228,7 @@ export function HeroVisual() {
           "opacity-45 sm:opacity-55 filter blur-[0.5px]"
         )}
       >
-        <WindowFrame title={screens[prevScreenIdx].title} className="bg-mist/95 shadow-md">
+        <WindowFrame title={screens[prevScreenIdx].title} className="bg-card shadow-md">
           <AnimatePresence mode="wait">
             <motion.div
               key={`back-left-${screens[prevScreenIdx].id}`}
@@ -256,7 +256,7 @@ export function HeroVisual() {
           "opacity-45 sm:opacity-55 filter blur-[0.5px]"
         )}
       >
-        <WindowFrame title={screens[nextScreenIdx].title} className="bg-mist/95 shadow-md">
+        <WindowFrame title={screens[nextScreenIdx].title} className="bg-card shadow-md">
           <AnimatePresence mode="wait">
             <motion.div
               key={`back-right-${screens[nextScreenIdx].id}`}
@@ -272,14 +272,14 @@ export function HeroVisual() {
         </WindowFrame>
       </motion.div>
 
-      {/* Front Window: Center stage with AnimatePresence & 4px green progress bar */}
+      {/* Front Window: Center stage with AnimatePresence & 4px tomato progress bar */}
       <motion.div
         style={{
           y: shouldReduceMotion ? 0 : smoothFrontY,
         }}
         className="relative z-10 w-full shadow-window"
       >
-        <WindowFrame title={screens[activeScreen].title} className="bg-white">
+        <WindowFrame title={screens[activeScreen].title} className="bg-card">
           <div aria-live="off" className="min-h-[195px] sm:min-h-[230px] flex flex-col justify-between">
             <AnimatePresence mode="wait">
               <motion.div
@@ -309,7 +309,7 @@ export function HeroVisual() {
                     className={cn(
                       "w-2.5 h-2.5 rounded-full transition-all duration-200",
                       activeScreen === idx
-                        ? "bg-green w-5"
+                        ? "bg-tomato w-5"
                         : "bg-line hover:bg-ink-muted"
                     )}
                     aria-label={`Show screen ${idx + 1}`}
@@ -319,12 +319,12 @@ export function HeroVisual() {
                 <button
                   type="button"
                   onClick={() => setIsManualPaused(!isManualPaused)}
-                  className="ml-0.5 p-1 rounded hover:bg-mist text-ink-muted hover:text-ink transition-colors"
+                  className="ml-0.5 p-1 rounded hover:bg-paper-deep text-ink-muted hover:text-ink transition-colors"
                   aria-pressed={isManualPaused}
                   aria-label={isManualPaused ? "Resume screen cycling" : "Pause screen cycling"}
                 >
                   {isManualPaused ? (
-                    <Play className="w-3 h-3 text-green" />
+                    <Play className="w-3 h-3 text-tomato-ink" />
                   ) : (
                     <Pause className="w-3 h-3" />
                   )}
@@ -333,10 +333,10 @@ export function HeroVisual() {
             </div>
           </div>
 
-          {/* 4px Green Progress Bar filling along the bottom edge */}
+          {/* 4px Tomato Progress Bar filling along the bottom edge */}
           <div className="w-full h-1 bg-line/60 overflow-hidden rounded-b-[18px] -mx-4 sm:-mx-6 -mb-4 sm:-mb-6 mt-3 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)]">
             <div
-              className="h-full bg-green transition-[width] ease-linear"
+              className="h-full bg-tomato transition-[width] ease-linear"
               style={{
                 width: shouldReduceMotion ? "100%" : `${progress}%`,
                 transitionDuration: isPaused ? "0ms" : "80ms",

@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center py-20 px-4 bg-mist">
+    <div className="min-h-[70vh] flex items-center justify-center py-20 px-4 bg-paper">
       <div className="max-w-md w-full text-center space-y-6">
-        <div className="font-heading font-black text-7xl sm:text-8xl text-green tracking-tight">
+        <div className="font-heading font-black text-7xl sm:text-8xl text-tomato tracking-tight">
           404
         </div>
 
@@ -21,10 +21,11 @@ export default function NotFound() {
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Button
             href="/"
-            variant="green"
+            variant="ink"
             size="md"
+            rightIcon={<span>→</span>}
           >
-            Back to Home →
+            Back to Home
           </Button>
           <Button
             href="/services"

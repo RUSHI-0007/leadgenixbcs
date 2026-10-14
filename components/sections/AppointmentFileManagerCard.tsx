@@ -66,7 +66,7 @@ export function AppointmentFileManagerCard() {
   return (
     <div
       ref={containerRef}
-      className="mockup-container relative w-full max-w-lg mx-auto min-h-[380px] sm:min-h-[420px] flex items-center justify-center py-4"
+      className="mockup-container relative w-full max-w-lg mx-auto min-h-[380px] sm:min-h-[420px] flex items-center justify-center py-4 select-none"
     >
       {/* 1. Base WindowFrame: "Appointment campaign — Rubrik Inc." */}
       <motion.div
@@ -80,7 +80,7 @@ export function AppointmentFileManagerCard() {
             {/* Row 1 */}
             <div className="flex items-center justify-between py-2.5 sm:py-3 text-xs sm:text-sm">
               <div className="flex items-center gap-2.5 text-ink-soft">
-                <Target className="w-4 h-4 text-indigo shrink-0" />
+                <Target className="w-4 h-4 text-ink-soft shrink-0" />
                 <span>ICP accounts reached</span>
               </div>
               <span className="font-bold text-ink font-mono">250+</span>
@@ -89,7 +89,7 @@ export function AppointmentFileManagerCard() {
             {/* Row 2 */}
             <div className="flex items-center justify-between py-2.5 sm:py-3 text-xs sm:text-sm">
               <div className="flex items-center gap-2.5 text-ink-soft">
-                <CalendarCheck className="w-4 h-4 text-indigo shrink-0" />
+                <CalendarCheck className="w-4 h-4 text-ink-soft shrink-0" />
                 <span>Appointments booked</span>
               </div>
               <span className="font-bold text-ink font-mono">25</span>
@@ -98,7 +98,7 @@ export function AppointmentFileManagerCard() {
             {/* Row 3 */}
             <div className="flex items-center justify-between py-2.5 sm:py-3 text-xs sm:text-sm">
               <div className="flex items-center gap-2.5 text-ink-soft">
-                <CheckCircle2 className="w-4 h-4 text-indigo shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-ink-soft shrink-0" />
                 <span>Appointments completed</span>
               </div>
               <span className="font-bold text-ink font-mono">18</span>
@@ -107,10 +107,10 @@ export function AppointmentFileManagerCard() {
             {/* Row 4 */}
             <div className="flex items-center justify-between py-2.5 sm:py-3 text-xs sm:text-sm">
               <div className="flex items-center gap-2.5 text-ink-soft">
-                <TrendingUp className="w-4 h-4 text-green shrink-0" />
+                <TrendingUp className="w-4 h-4 text-ink-soft shrink-0" />
                 <span className="font-semibold text-ink">Success rate</span>
               </div>
-              <span className="font-black text-green text-sm sm:text-base font-mono">
+              <span className="font-bold text-tomato-ink text-sm sm:text-base font-mono">
                 72%
               </span>
             </div>
@@ -130,8 +130,8 @@ export function AppointmentFileManagerCard() {
         className={cn(
           "absolute right-0 sm:-right-4 bottom-2 sm:bottom-0",
           "w-[94%] sm:w-[58%] max-w-[280px]",
-          "rounded-[14px] bg-white border border-line",
-          "shadow-[0_16px_40px_-10px_rgba(75,85,216,0.24)] z-20 p-2.5 sm:p-3"
+          "rounded-[14px] bg-card border border-line",
+          "shadow-card z-20 p-2.5 sm:p-3"
         )}
       >
         {/* Popover Header */}
@@ -139,7 +139,7 @@ export function AppointmentFileManagerCard() {
           <span className="text-[11px] font-mono uppercase tracking-wider text-ink-muted">
             Deliverables
           </span>
-          <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-tomato animate-pulse" />
         </div>
 
         {/* Deliverables Rows */}
@@ -158,14 +158,14 @@ export function AppointmentFileManagerCard() {
                   }}
                   className={cn(
                     "relative flex items-center justify-between px-2 py-1.5 sm:py-2 rounded-lg cursor-pointer transition-colors duration-150 text-[11px] sm:text-xs",
-                    isActive ? "text-green font-bold" : "text-ink hover:text-ink font-medium"
+                    isActive ? "text-tomato-ink font-bold" : "text-ink hover:text-ink font-medium"
                   )}
                 >
-                  {/* Active highlight pill advancing down rows via layoutId */}
+                  {/* Moving highlight bar = --tomato-tint */}
                   {isActive && (
                     <motion.div
                       layoutId="popover-highlight"
-                      className="absolute inset-0 bg-green-tint rounded-lg z-0"
+                      className="absolute inset-0 bg-tomato-tint rounded-lg z-0"
                       transition={{
                         type: "spring",
                         stiffness: 300,
@@ -178,7 +178,7 @@ export function AppointmentFileManagerCard() {
                     <Icon
                       className={cn(
                         "w-3.5 h-3.5 shrink-0 transition-colors",
-                        isActive ? "text-green" : "text-ink-soft"
+                        isActive ? "text-tomato-ink" : "text-ink-soft"
                       )}
                     />
                     <span className="truncate">{item.label}</span>

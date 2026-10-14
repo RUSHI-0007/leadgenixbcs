@@ -37,13 +37,13 @@ export function CaseStudyCard({ caseStudy, onOpenDetails }: CaseStudyCardProps) 
       }}
       role="button"
       tabIndex={0}
-      className="p-6 sm:p-7 rounded-[20px] bg-mint transition-all duration-200 hover:-translate-y-1 hover:shadow-cardGreen cursor-pointer select-none text-left flex flex-col justify-between"
+      className="p-6 sm:p-7 rounded-[20px] bg-card border border-line transition-all duration-200 hover:-translate-y-1 hover:border-tomato hover:shadow-card cursor-pointer select-none text-left flex flex-col justify-between"
       aria-label={`View details for ${caseStudy.client} case study`}
     >
       <div className="space-y-4">
-        {/* Monogram circle + Client + Category */}
+        {/* Monogram circle --tomato-tint with --tomato-ink initials */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-paper border border-line flex items-center justify-center font-heading font-bold text-xs text-ink shrink-0">
+          <div className="w-10 h-10 rounded-full bg-tomato-tint flex items-center justify-center font-heading font-extrabold text-xs text-tomato-ink shrink-0">
             {initials}
           </div>
           <div>
@@ -56,9 +56,9 @@ export function CaseStudyCard({ caseStudy, onOpenDetails }: CaseStudyCardProps) 
           </div>
         </div>
 
-        {/* Big figure with yellow highlight */}
+        {/* Big figure with tomato marker highlight */}
         <div className="pt-2">
-          <div className="font-heading font-black text-3xl sm:text-4xl text-ink tracking-tight">
+          <div className="font-heading font-extrabold text-3xl sm:text-4xl text-ink tracking-tight">
             <Highlight>{keyMetric}</Highlight>
           </div>
           <p className="text-xs text-ink-muted mt-1 font-mono uppercase tracking-wider">
@@ -77,7 +77,7 @@ export function CaseStudyCard({ caseStudy, onOpenDetails }: CaseStudyCardProps) 
         </div>
       </div>
 
-      <div className="pt-4 mt-4 border-t border-line/60 flex items-center justify-between text-xs font-bold text-green">
+      <div className="pt-4 mt-4 border-t border-line/60 flex items-center justify-between text-xs font-bold text-tomato-ink">
         <span>View campaign breakdown</span>
         <span aria-hidden="true">→</span>
       </div>

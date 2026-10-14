@@ -6,6 +6,7 @@ interface WindowFrameProps {
   children: React.ReactNode;
   className?: string;
   headerRight?: React.ReactNode;
+  isDark?: boolean;
 }
 
 export function WindowFrame({
@@ -13,21 +14,23 @@ export function WindowFrame({
   children,
   className = "",
   headerRight,
+  isDark = false,
 }: WindowFrameProps) {
   return (
     <div
       className={cn(
-        "rounded-[18px] bg-white border border-line shadow-window overflow-hidden transition-all duration-300",
+        "rounded-[18px] bg-card border border-line overflow-hidden transition-all duration-300",
+        isDark ? "shadow-windowDark" : "shadow-window",
         className
       )}
     >
       {/* Window Title Bar */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-line/80 bg-paper/90 select-none">
-        {/* 3 Gray traffic-light dots */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-line bg-paper/90 select-none">
+        {/* 3 Gray traffic-light dots in --line */}
         <div className="flex items-center space-x-1.5" aria-hidden="true">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#E5E7EB] border border-[#D1D5DB]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#E5E7EB] border border-[#D1D5DB]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-[#E5E7EB] border border-[#D1D5DB]" />
+          <div className="w-2.5 h-2.5 rounded-full bg-line/80 border border-line" />
+          <div className="w-2.5 h-2.5 rounded-full bg-line/80 border border-line" />
+          <div className="w-2.5 h-2.5 rounded-full bg-line/80 border border-line" />
         </div>
 
         {/* Centered Title */}
@@ -41,8 +44,8 @@ export function WindowFrame({
         </div>
       </div>
 
-      {/* Window Body Content */}
-      <div className="p-4 sm:p-6 bg-white">
+      {/* Window Body Content (stays white on both light and dark so it pops) */}
+      <div className="p-4 sm:p-6 bg-card text-ink">
         {children}
       </div>
     </div>

@@ -11,25 +11,27 @@ const config: Config = {
     extend: {
       colors: {
         ink: {
-          DEFAULT: "#16231D",
-          soft: "#4A5851",
-          muted: "#718077",
+          DEFAULT: "#3F3F3F",
+          deep: "#2E2E2E",
+          soft: "#5A5A5A",
+          muted: "#787878",
         },
-        green: {
-          DEFAULT: "#1E9E62",
-          tint: "#E6F6EE",
-          dark: "#16804F",
+        tomato: {
+          DEFAULT: "#FE5E56",
+          hover: "#F04A42",
+          ink: "#CF362D",
+          tint: "#FFE6E3",
         },
-        indigo: {
-          DEFAULT: "#4B55D8",
-          tint: "#EEF0FF",
-          dark: "#3B44B5",
+        paper: {
+          DEFAULT: "#F6F2EC",
+          deep: "#ECE6DC",
         },
-        highlight: "#FFE770",
-        paper: "#FFFFFF",
-        mist: "#F6F7FC",
-        mint: "#F4FAF7",
-        line: "#E4E7EF",
+        card: "#FFFFFF",
+        line: {
+          DEFAULT: "#DDD6CA",
+          dark: "#575757",
+        },
+        error: "#B3261E",
       },
       fontFamily: {
         sans: ["var(--font-hanken)", "sans-serif"],
@@ -40,11 +42,11 @@ const config: Config = {
         container: "1200px",
       },
       boxShadow: {
-        green: "0 10px 24px -8px rgba(30, 158, 98, 0.45)",
-        indigo: "0 10px 24px -8px rgba(75, 85, 216, 0.45)",
-        card: "0 12px 32px -14px rgba(75, 85, 216, 0.22)",
-        cardGreen: "0 12px 32px -14px rgba(30, 158, 98, 0.20)",
-        window: "0 20px 48px -12px rgba(22, 35, 29, 0.12), 0 1px 3px rgba(22, 35, 29, 0.05)",
+        tomatoCta: "0 10px 24px -10px rgba(254, 94, 86, 0.55)",
+        card: "0 12px 32px -14px rgba(63, 63, 63, 0.20)",
+        cardDark: "0 16px 36px -12px rgba(0, 0, 0, 0.45)",
+        window: "0 18px 40px -18px rgba(63, 63, 63, 0.35)",
+        windowDark: "0 24px 48px -20px rgba(0, 0, 0, 0.50)",
       },
       borderRadius: {
         button: "10px",
@@ -56,4 +58,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-
